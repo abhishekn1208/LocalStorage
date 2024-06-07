@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 20px;
+    }
+
+    #container>div {
+        border: 1px solid black;
+        text-align: center;
+        padding: 10px 10px;
+    }
+</style>
+
+<body>
+    <h2>Cart</h2>
+    <a href="index.html">home</a>
+    <div id="container">
+
+    </div>
+
+</body>
+
+</html>
+<script>
+ 
+    let cartData = JSON.parse(localStorage.getItem("cart-data"))
+    console.log(cartData)
+    
+    let container = document.getElementById("container")
+    displayData(cartData)
+    
+
+    function displayData(cartData) {
+         container.innerHTML = "";
+        cartData.forEach((ele,i) => {
+           
+
+            let div = document.createElement("div");
+            let name = document.createElement("p")
+            name.innerText = ele.name;
+            let email = document.createElement("p")
+            email.innerText = ele.email;
+            let username = document.createElement("p")
+            username.innerText = ele.username;
+            let btn = document.createElement("button")
+            btn.innerText = "Remove"
+            btn.addEventListener("click", () => {
+                RemoveData(ele);
+            })
+
+
+            container.appendChild(div)
+            div.append(name, username, email, btn)
+        })
+    }
+
+    function RemoveData(ele, i) {
+        cartData.splice(i, 1)
+        displayData(cartData)
+        localStorage.setItem("cart-data", JSON.stringify(cartData))
+    }
+</script>

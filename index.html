@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LocalStorage</title>
+</head>
+<style>
+    #main{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        grid-gap: 20px;
+    }
+    #main>div{
+        border: 1px solid black;
+        text-align: center;
+        padding: 10px 10px;
+    }
+</style>
+<body>
+    <div id="main">
+        <a href="cart.html">cart</a>
+    </div>
+</body>
+<script>
+ 
+   let user = [
+  {
+    id: 1,
+    name: "Leanne Graham",
+    username: "Bret",
+    email: "Sincere@april.biz",
+  },
+  {
+    id: 2,
+    name: "Ervin Howell",
+    username: "Antonette",
+    email: "Shanna@melissa.tv",
+  },
+  {
+    id: 3,
+    name: "Clementine Bauch",
+    username: "Samantha",
+    email: "Nathan@yesenia.net",
+  },
+  {
+    id: 4,
+    name: "Patricia Lebsack",
+    username: "Karianne",
+    email: "Julianne.OConner@kory.org",
+  },
+  {
+    id: 5,
+    name: "Chelsey Dietrich",
+    username: "Kamren",
+    email: "Lucio_Hettinger@annie.ca",
+  },
+  {
+    id: 6,
+    name: "Mrs. Dennis Schulist",
+    username: "Leopoldo_Corkery",
+    email: "Karley_Dach@jasper.info",
+  },
+  {
+    id: 7,
+    name: "Kurtis Weissnat",
+    username: "Elwyn.Skiles",
+    email: "Telly.Hoeger@billy.biz",
+  },
+  {
+    id: 8,
+    name: "Nicholas Runolfsdottir V",
+    username: "Maxime_Nienow",
+    email: "Sherwood@rosamond.me",
+  },
+  {
+    id: 9,
+    name: "Glenna Reichert",
+    username: "Delphine",
+    email: "Chaim_McDermott@dana.io",
+  },
+  {
+    id: 10,
+    name: "Clementina DuBuque",
+    username: "Moriah.Stanton",
+    email: "Rey.Padberg@karina.biz",
+  },
+];
+
+displayData(user);
+
+function displayData(user){
+    user.forEach((ele)=>{
+        let main = document.getElementById("main")
+let div = document.createElement("div");
+let name = document.createElement("p")
+name.innerText = ele.name;
+let email = document.createElement("p")
+email.innerText = ele.email;
+let username = document.createElement("p")
+username.innerText = ele.username;
+let btn = document.createElement("button")
+btn.innerText = "Add to Cart"
+btn.addEventListener("click",()=>{
+    AddToCart(ele); //ele pass as a argument
+})
+
+
+
+
+main.appendChild(div)
+div.append(name,username,email,btn)
+})
+}
+
+let CartData = JSON.parse(localStorage.getItem("cart-data"))|| [];
+function AddToCart(ele){ // ele grab as a paramter
+    CartData.push(ele);
+    localStorage.setItem("cart-data", JSON.stringify(CartData))
+}
+
+</script>
+</html>
